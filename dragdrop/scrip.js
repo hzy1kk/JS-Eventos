@@ -1,22 +1,25 @@
 const quadrado = document.getElementById('quadrado');
-const boxes = document.querySelectorAll('.container');
+const containers = document.querySelectorAll('.container');
 
-quadrado.addEventListener('dragstart', (e) => {
-    e.target.style.opacity = '0.5';
+// Quando o arrasto começa
+quadrado.addEventListener('dragstart', () => {
+    quadrado.classList.add('dragging');
 });
 
-quadrado.addEventListener('dragend', (e) => {
-    e.target.style.opacity = '1';
+// Quando o arrasto termina
+quadrado.addEventListener('dragend', () => {
+    quadrado.classList.remove('dragging');
 });
 
-boxes.forEach(box => {
-    // ESSA LINHA É O SEGREDO: Sem o preventDefault, o drop não funciona
-    box.addEventListener('dragover', (e) => {
-        e.preventDefault(); 
+containers.forEach(container => {
+    // ESSENCIAL: O navegador bloqueia o drop por padrão. 
+    // O preventDefault() libera o drop.
+    container.addEventListener('dragover', (e) => {
+        e.preventDefault();
     });
 
-    box.addEventListener('drop', (e) => {
-        e.preventDefault();
-        box.appendChild(quadrado);
+    container.addEventListener('drop', () => {
+        // Move o quadrado para dentro do container onde foi solto
+        container.appendChild(quadrado);
     });
 });

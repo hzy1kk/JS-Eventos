@@ -2,45 +2,31 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drag and Drop</title>
+    <title>Drag and Drop Teste</title>
     <style>
-        body { font-family: sans-serif; display: flex; gap: 20px; padding: 50px; }
-        
         .container {
             width: 200px;
             height: 200px;
-            border: 2px dashed #aaa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
+            border: 5px solid black;
+            margin: 20px;
+            display: inline-block;
+            vertical-align: top;
         }
-
         #quadrado {
-            width: 80px;
-            height: 80px;
-            background-color: #3498db;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: grab;
-            font-weight: bold;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            cursor: move;
         }
-
-        #quadrado:active { cursor: grabbing; }
     </style>
 </head>
 <body>
 
-    <div class="container" id="origem">
-        <div id="quadrado" draggable="true">DRAG</div>
+    <div class="container">
+        <div id="quadrado" draggable="true"></div>
     </div>
 
-    <div class="container" id="destino">
-        SOLTE AQUI
-    </div>
+    <div class="container"></div>
 
     <script src="script.js"></script>
 </body>
