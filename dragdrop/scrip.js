@@ -7,17 +7,12 @@ quadrado.addEventListener('dragstart', (e) => {
 
 quadrado.addEventListener('dragend', (e) => {
     e.target.style.opacity = '1';
-    boxes.forEach(box => box.style.background = "transparent");
 });
 
 boxes.forEach(box => {
+    // ESSA LINHA É O SEGREDO: Sem o preventDefault, o drop não funciona
     box.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        box.style.background = "#f0f0f0";
-    });
-
-    box.addEventListener('dragleave', () => {
-        box.style.background = "transparent";
+        e.preventDefault(); 
     });
 
     box.addEventListener('drop', (e) => {
