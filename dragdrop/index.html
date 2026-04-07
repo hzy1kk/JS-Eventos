@@ -4,30 +4,70 @@
     <meta charset="UTF-8">
     <title>Drag and Drop Teste</title>
     <style>
+        body { display: flex; justify-content: center; padding-top: 50px; }
+        
         .container {
-            width: 200px;
-            height: 200px;
-            border: 5px solid black;
+            width: 150px;
+            height: 150px;
+            border: 3px dashed #666;
             margin: 20px;
-            display: inline-block;
-            vertical-align: top;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
         }
+
         #quadrado {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            cursor: move;
+            width: 80px;
+            height: 80px;
+            background-color: #2ecc71;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
         }
+
+        #quadrado:active { cursor: grabbing; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="quadrado" draggable="true"></div>
+    <div class="container" id="box1">
+        <div id="quadrado" draggable="true">DRAG</div>
     </div>
 
-    <div class="container"></div>
+    <div class="container" id="box2"></div>
 
-    <script src="script.js"></script>
+    <script>
+        const dragItem = document.getElementById('quadrado');
+        const containers = document.querySelectorAll('.container');
+
+        dragItem.addEventListener('dragstart', () => {
+            dragItem.style.opacity = '0.5';
+        });
+
+        dragItem.addEventListener('dragend', () => {
+            dragItem.style.opacity = '1';
+        });
+
+        containers.forEach(container => {
+            container.addEventListener('dragover', (e) => {
+                e.preventDefault(); // ISSO LIBERA O DROP
+                container.style.borderColor = "blue";
+            });
+
+            container.addEventListener('dragleave', () => {
+                container.style.borderColor = "#666";
+            });
+
+            container.addEventListener('drop', (e) => {
+                e.preventDefault();
+                container.appendChild(dragItem);
+                container.style.borderColor = "#666";
+            });
+        });
+    </script>
 </body>
 </html>
